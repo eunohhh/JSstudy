@@ -107,7 +107,7 @@ analyze`안녕 나는 ${sonny} 입니다`; // ['안녕 나는 ', ' 입니다'] /
 
 
 
-// 05) spread operator
+// 05) spread operator, 파라미터 신문법
 
 // spread operator 의 활용법 중 유용한 것들
 
@@ -124,4 +124,18 @@ sumsum.apply(undefined, array01); // 60
 
 sumsum(...array01) // 60
 
+// 함수의 default 파라미터
+function func03(a, b=10) {
+    console.log(b) // 10 
+}
+
+// 함수의 arguments
+function func04(a,b,c,d) {
+    console.log(arguments) // [a, b, c, d]
+}
+
+// 함수에서의 ... spread operator = Rest parameters
+function func05(a, b, ...rest) {
+    console.log(rest) // [3,4,5,6,7,8,9 ...]
+}
 
