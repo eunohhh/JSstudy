@@ -124,8 +124,23 @@ sumsum.apply(undefined, array01); // 60
 
 sumsum(...array01) // 60
 
+// 여기서 잠깐 .apply() 함수에 대하여
+// aa.apply(bb, params) : aa라는 함수를 bb라는 객체에 적용해서 실행해라! 이 때 params 는 적용할 파라미터이고 배열로 가능
+const person = {
+    sayHello : function(a, b, c){
+        console.log(this.name + '안녕' + a + b + c)
+    }
+}
+
+const person2 = {
+    name : '손흥민'
+}
+
+person.sayHello.apply(person2, [1, 2, 3]); // 손흥민 안녕 6
+person.sayHello.call(person2, 1, 2, 3); // 동일
+
 // 함수의 default 파라미터
-function func03(a, b=10) {
+function func03(a, b = 10) {
     console.log(b) // 10 
 }
 
@@ -135,7 +150,29 @@ function func04(a,b,c,d) {
 }
 
 // 함수에서의 ... spread operator = Rest parameters
-function func05(a, b, ...rest) {
+function func05(a, b, ...rest) { // a 가 1, b 가 2 일 때
     console.log(rest) // [3,4,5,6,7,8,9 ...]
 }
+
+
+
+// 06) prototype 과 상속
+
+// 어떤 constructor 의 부모객체에 prototype 으로 등록해 줌
+// 이제 그 아래의 모든 자식객체들에서는 prototype으로 등록한 데이터에 접근 가능
+machine.prototype.gender = 'male'
+
+// 생성된 자식객체에서 .__proto__ 를 실행하면 부모의 prototype 이 출력됨
+const exObject04 = new machine();
+console.log(exObject04.__proto__); // gender 를 포함하여 이것 저것 나옴
+
+// 상속 기능 구현 방법으로 자식 객체에 .__proto__ = 부모객체  같은 패턴으로 부모 prototype 등록 가능
+const childrenObject = {};
+childrenObject.__proto__ = exObject04;
+
+// Object.create(상속대상) 하면 부모를 상속
+const 부모 = { name : 'Kim', age : 50 };
+const 자식 = Object.create(부모);
+console.log(자식.age); // 50
+
 
