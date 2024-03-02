@@ -149,8 +149,8 @@ console.log('test!', t&&c);
 let sum = 0; 
 var i = 1;
 do {
-  sum = sum + i;
-  i = i + 1;
+    sum = sum + i;
+    i = i + 1;
 } while(i < 10)
 
 console.log('dowhile', sum);
@@ -158,8 +158,8 @@ console.log('dowhile', sum);
 let sum2 = 0; 
 var i2 = 1;
 while(i2 < 10){
-  sum2 = sum2 + i2;
-  i2 = i2 + 1;
+    sum2 = sum2 + i2;
+    i2 = i2 + 1;
 }
 console.log('while', sum2);
 
@@ -174,3 +174,100 @@ do {
     x++;
 } while ( x < 1 )
 
+
+const band = [10,10,100];
+const hp = 10;
+const at = [[1,15],[3,1]];
+
+const result = solution(band, hp, at);
+
+console.log(result)
+
+function solution(bandage, health, attacks) {    
+    const t = bandage[0];
+    const x = bandage[1];
+    const y = bandage[2];
+
+    let currHealth = health;
+    let curAttack = 0;
+
+    for ( const e of attacks ){
+        const attackTime = e[0];
+        const damage = e[1];
+
+        const timeDiff = attackTime - curAttack - 1;
+
+        const success = Math.floor(timeDiff / t);
+
+        let get = timeDiff * x + success * y;
+        
+        currHealth += get;
+        if(currHealth >= health) currHealth = health;
+        currHealth -= damage;
+
+        curAttack = attackTime;
+
+        if(currHealth <= 0){
+            return currHealth = -1;
+        }
+    };
+
+    return currHealth;
+}
+
+// function solution(bandage, health, attacks) {    
+//     const t = bandage[0];
+//     const x = bandage[1];
+//     const y = bandage[2];
+
+//     let currHealth = health;
+
+//     function getHealth(attackInterval, over){
+//         let start = 0;
+//         while(start < attackInterval) {
+//             start ++;
+//             if(currHealth < health) {
+//                 currHealth += x;
+//             }
+//         } 
+//         start = 0;
+//         if(over) currHealth += y;
+//         if(currHealth >= health) currHealth = health;
+//     };
+
+//     function loseHealth(damage){
+//         currHealth -= damage;        
+//     };
+
+//     attacks.forEach((e,i) => {
+//         const attackTime = e[0];
+//         const damage = e[1];
+
+//         let attackInterval;
+
+//         if(i === 0){
+//             attackInterval = attacks[0][0] - 1;
+//         }else{
+//             attackInterval = attackTime - attacks[i-1][0] -1;
+//         }
+
+//         let over = attackInterval >= t ? true : false;
+
+//         if(attackInterval === 0) {
+//             loseHealth(damage);
+//         }else{
+//             getHealth(attackInterval, over);
+//             loseHealth(damage);
+//         }  
+
+//         if(currHealth <= 0){
+//             currHealth = -1;
+//         }
+//     });
+
+//     return currHealth;
+// }
+
+// else if(i === attacks.length -1){
+//     attackInterval = attacks[attacks.length -1][0] - attacks[attacks.length -2][0] -1;
+// }
