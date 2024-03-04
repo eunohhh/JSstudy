@@ -181,8 +181,6 @@ const at = [[1,15],[3,1]];
 
 const result = solution(band, hp, at);
 
-console.log(result)
-
 function solution(bandage, health, attacks) {    
     const t = bandage[0];
     const x = bandage[1];
